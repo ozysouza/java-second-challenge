@@ -1,5 +1,7 @@
 package com.desouza.event.entities;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
@@ -8,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,6 +28,9 @@ public class Activity {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+    @OneToMany(mappedBy = "activity")
+    private List<Session> sessions = new ArrayList<>();
 
     public Activity() {
     }
@@ -75,6 +81,10 @@ public class Activity {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public List<Session> getSessions() {
+        return sessions;
     }
 
     @Override
